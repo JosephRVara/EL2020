@@ -1,4 +1,4 @@
-# ![NewPaltz Logo](~/CPS342/images/newpaltzlogo.jpg)
+!(/images/newpaltzlogo.jpg)
 # **Spring 2020 Embedded Linux class.**
 
 Hello, and welcome to Mr. Simons's repository for the spring 1998 embedded linux class.  
