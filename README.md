@@ -1,4 +1,4 @@
-![NewPaltz Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg =180x100)
+![NewPaltz Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg) <!-- .element height="50%" width="50%" -->
 # **Spring 2020 Embedded Linux class.**
 This repository documents my class work and projects done for *__CPS342__*.
 
