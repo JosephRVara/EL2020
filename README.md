@@ -1,7 +1,11 @@
-![NewPaltz Logo](/home/jrv/CPS342/image/newpaltzlogo.jpg)
+![NewPaltz Logo](/home/jrv/CPS342/images/newpaltzlogo.jpg)
 # **Spring 2020 Embedded Linux class.**
+This repository documents my class work and projects done for *__CPS342__*
 
-Hello, and welcome to Mr. Simons's repository for the spring 1998 embedded linux class.  
-This repository will be used as an example of ways to maintain a code base while working on a project. 
-This is **NOT** the Embedded Linux class itself.  That is hosted on Google Classroom.  
-Please contact "simonsj [at] newpaltz [dot] edu" if you are in the class, but do not have the classroom code.
+1. **Personal Information:**
+	Name: *Joseph R. Vara*
+	Major: *Electrical Engineering*
+	ID: *[N03871801]*(https://github.com/JosephRVara)
+	Year: *Junior*
+2. **Class Start Date:** Jan 22, 2020
+3. **Class End Date:** May 6, 2020
