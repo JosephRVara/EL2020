@@ -1,5 +1,4 @@
-![NewPaltz Logo](/home/jrv/CPS342/images)
-Format: ![Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
+![NewPaltz Logo](/home/jrv/CPS342/image/newpaltzlogo.jpg)
 # **Spring 2020 Embedded Linux class.**
 
 Hello, and welcome to Mr. Simons's repository for the spring 1998 embedded linux class.  
