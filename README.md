@@ -1,4 +1,5 @@
 <img src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg" width="50%">
+
 # **Spring 2020 Embedded Linux class.**
 This repository documents my class work and projects done for *__CPS342__*.
 
