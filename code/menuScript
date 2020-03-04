@@ -1,0 +1,39 @@
+#!/bin/bash
+
+main_Menu(){
+        echo "~*~*~*~*~*~*~*~*~"
+        echo "     WELCOME"
+        echo "~*~*~*~*~*~*~*~*~"
+        echo "1. Weather Report"
+        echo "2. Date/Time"
+        echo "3. System Update"
+        echo "4. Close"
+}
+
+currentDate(){
+        local now="$(date)"
+	printf "Current date and time %s\n" "$now"
+}
+
+weatherReport(){
+	curl wttr.in
+}
+
+exitScript(){
+	echo "Exiting script.."
+	exit 0
+}
+user_Input(){
+        local userInput
+	echo "Choose Option: "
+        read -r userInput
+        case "$userInput" in
+                1) weatherReport ;;
+                2) currentDate ;;
+                3) sudo apt-get update ;;
+                4) exitScript ;;
+        esac
+}
+        main_Menu
+        user_Input
+
