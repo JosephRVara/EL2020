@@ -6,7 +6,6 @@ import Adafruit_DHT
 
 #Assign GPIO pins
 tempPin = 26
-#LEDPin = 27
 
 #Initialize GPIO
 GPIO.setmode(GPIO.BCM)
@@ -23,6 +22,6 @@ try:
 			print('Temperature = {0:0.1f}*F Humidity = {1:0.1f}%'.format(temperature, humidity))
 		else:
 			print('Failed to get reading. Try again!')
-#temp,hum=[DHT.read_retry(DHT.DH11,17)]
+
 except KeyboardInterrupt:
 	GPIO.cleanup()
