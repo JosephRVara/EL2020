@@ -6,7 +6,11 @@ import Adafruit_DHT
 tempPin = 26
 
 #Initialize GPIO
+<<<<<<< HEAD
 GPIO.setwarnings(False);
+=======
+GPIO.setwarnings(False)
+>>>>>>> 049659318adeec08a0d2dbb944ece748150f09db
 GPIO.setmode(GPIO.BCM)
 
 #Temp and Humidity Sensor
