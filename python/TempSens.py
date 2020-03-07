@@ -1,14 +1,12 @@
 #Import Libraries we will be using
 import RPi.GPIO as GPIO
 import Adafruit_DHT
-#import time
-#import os
 
 #Assign GPIO pins
 tempPin = 26
-#LEDPin = 27
 
 #Initialize GPIO
+GPIO.setwarnings(False);
 GPIO.setmode(GPIO.BCM)
 
 #Temp and Humidity Sensor
@@ -23,6 +21,7 @@ try:
 			print('Temperature = {0:0.1f}*F Humidity = {1:0.1f}%'.format(temperature, humidity))
 		else:
 			print('Failed to get reading. Try again!')
-#temp,hum=[DHT.read_retry(DHT.DH11,17)]
+
 except KeyboardInterrupt:
+	print('\nSensational Sensing!')
 	GPIO.cleanup()
