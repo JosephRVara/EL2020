@@ -6,11 +6,7 @@ import Adafruit_DHT
 tempPin = 26
 
 #Initialize GPIO
-<<<<<<< HEAD
 GPIO.setwarnings(False);
-=======
-GPIO.setwarnings(False)
->>>>>>> 049659318adeec08a0d2dbb944ece748150f09db
 GPIO.setmode(GPIO.BCM)
 
 #Temp and Humidity Sensor
@@ -21,8 +17,7 @@ try:
 		humidity, temperature = Adafruit_DHT.read_retry(tempSensor, tempPin)
 		temperature = temperature * 9/5.0 +32
 		if humidity is not None and temperature is not None:
-			tempFahr = '{0:0.1f}*F'.format(temperature)
-			print('Temperature = {0:0.1f}*F Humidity = {1:0.1f}%'.format(temperature, humidity))
+			print('Temperature = {0:0.1f}*F || Humidity = {1:0.1f}%'.format(temperature, humidity))
 		else:
 			print('Failed to get reading. Try again!')
 
