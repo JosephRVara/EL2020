@@ -6,7 +6,6 @@ import os
 
 #Assign GPIO pins
 tempPin = 26
-
 #Initialize GPIO
 GPIO.setwarnings(False);
 GPIO.setmode(GPIO.BCM)
@@ -18,17 +17,19 @@ def readF(tempPin):
 	temperature = temperature * 9/5.0 +32
 	if humidity is not None and temperature is not None:
 		tempFahr = '{0:0.1f}*F'.format(temperature)
+		humPercent = '{0:0.1f}%'.format(humidity)
 	else:
 		print('Failed to get reading.')
-	return tempFahr
-
+	return tempFahr, humPercent
 try:
 	with open("../tempLog/tempLog.csv", "a") as log:
 
 		while True:
-			data = readF(tempPin)
-			print (data)
-			log.write("{0}      {1}\n".format(time.strftime("%Y - %m - %d  %H:%M:%S"),str(data)))
+			data1, data2 =readF(tempPin)
+			print(data1)
+			print(data2)
+			log.write("{0}      {1}              {2}\n".format(time.strftime("%Y - %m - %d  %H:%M:%S"),str(data1),str(data2)))
+			time.sleep(1)
 
 except KeyboardInterrupt:
 	print('\nSensational Sensing!')
