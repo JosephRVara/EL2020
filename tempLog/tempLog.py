@@ -29,7 +29,7 @@ try:
 			print(data1)
 			print(data2)
 			log.write("{0}      {1}              {2}\n".format(time.strftime("%Y - %m - %d  %H:%M:%S"),str(data1),str(data2)))
-			time.sleep(1)
+			time.sleep(60)
 
 except KeyboardInterrupt:
 	print('\nSensational Sensing!')
