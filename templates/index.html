@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+
+		<title>Raspberry Pi Temperature</title>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	</head>
+
+	<body onload="go()", bgcolor="#2D2D2D">
+		<center>
+		<img src="https://www.raspberrypi.org/app/uploads/2012/01/Spec-RaspberryPi-GIF-256-Transp.gif" alt="RasPi" style="width:48px;height:48px;">
+		<h1 style="color:#7B585B;">Joe's Web Page</h1>
+		<h2 style="color:#7B585B;">SUNY New Paltz - CPS342 Embedded Linux</h2>
+		<h3 style="color:#A77E4F;">______________________________</h3>
+		<h2 style="color:#9BAE5C;">DHT11 Temperature Sensor Data</h2>
+		</center>
+		<center>
+			<div id="gauge" style="width: 250px; height: 250px"></div>
+			<div id="curve_chart" style="width: 1200px; height: 1200px"></div>
+			
+		</center>
+
+		<script type='text/javascript'>
+			//Load the charts libraries
+			google.charts.load('current', {packages:['gauge']});
+			google.charts.load('current', { packages: ['corechart'] });
+			
+			//create empty array as a global
+			var chartData = [];
+			
+			//This function is called when the page loads
+			function go(){
+				goTime = new Date();
+				console.log('It\'s Go Time! '+goTime);
+				getData();
+				setInterval(function() {
+					xTime = new Date();
+					console.clear();
+					console.log('Update Initiated: '+xTime);
+					getData();
+				}, 60000);
+			}
+			
+			//grabs the data from the sqlData app.route and pushes it into an array
+			function getData(){
+				//Clear the array first
+				chartData = [];
+				$.getJSON('/sqlData', function(chartJSON) {
+					console.log(chartJSON);
+					for (i = 0; i < chartJSON.length; i++){
+						chartData.push([new Date(chartJSON[i].Date), chartJSON[i].Temperature]);
+					};
+					drawGauge();
+					drawChart();
+				});
+			}
+			
+			//Draws the gauge
+			function drawGauge() {
+				var g2data = new google.visualization.arrayToDataTable([
+					[ {label: 'Temperature', id:'temp', type: 'number'} ]
+				]);
+				lastRow = chartData[chartData.length - 1];
+				temp1 = lastRow[lastRow.length - 1];
+				g2data.addRow([temp1]);
+
+				var options2 = {
+				    redFrom: 88, redTo: 120,
+				    yellowFrom:78, yellowTo: 120,
+				    greenFrom:68, greenTo: 120,
+				    minorTicks: 5
+				};
+
+			    	var gauge = new google.visualization.Gauge(document.getElementById('gauge'));
+			    	gauge.draw(g2data, options2);
+			    	gaugeTime = new Date();
+			    console.log('Gauge Drawn: '+gaugeTime);
+	        	}
+	        
+				//Draws the chart
+	        			function drawChart() {
+						var gdata = new google.visualization.DataTable();
+						gdata.addColumn('date', 'Date');
+						gdata.addColumn('number', 'Temperature');
+						gdata.addRows(chartData);
+
+					var options = {
+						title: 'Temperature Log',
+						titleTextStyle: { color: '#F7F7F7' },
+						vAxis: {title: 'Temp (ºF)', titleTextStyle: { color: '#F7F7F7' }, textStyle: { color: '#F7F7F7' }, gridlines: { color: '#000000' }},
+                                                hAxis: {title: 'Date', titleTextStyle: { color: '#F7F7F7' }, textStyle: { color: '#F7F7F7' }, gridlines: { color: '#000000' }},
+						chart: {
+						curveType: 'function'},
+						series: {0: { color: '#6A9AC0' }},
+						legend: {position: 'bottom', textStyle: { color:'#F7F7F7' }},
+						backgroundColor: '#2D2D2D',
+						chartArea: {backgroundColor: '#D3D3D3'}
+	        				};
+	        			var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+	        			chart.draw(gdata, options);
+	        			chartTime = new Date();
+			}
+
+		</script>
+
+	</body>
+       
+	 <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+                <meta http-equiv="Pragma" content="no-cache" />
+                <meta http-equiv="Expires" content="0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+                <style>
+		<link rel="stylesheet" href="button.css"/>
+        	</style>
+	</head>
+	<body bgcolor="#2D2D2D">
+		<center>
+		<h3 style="color:#A77E4F;">____________________________</h3>
+		<h2 style="color:#7B585B;">RasPi GPIO Control</h2>
+		</center>	
+	</body>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+		.switch{
+			position: relative;
+  			display: inline-block;
+ 			width: 60px;
+  			height: 34px;
+			}
+		
+		.switch input { 
+ 			opacity: 0;
+  			width: 0;
+  			height: 0;
+			}
+
+		.slider {
+  			position: absolute;
+  			cursor: pointer;
+  			top: 0;
+  			left: 0;
+  			right: 0;
+  			bottom: 0;
+  			background-color: #7C7C7C;
+  			-webkit-transition: .4s;
+  			transition: .4s;
+			}
+	
+		.slider:before {
+  			position: absolute;
+  			content: "";
+  			height: 26px;
+  			width: 26px;
+  			left: 4px;
+  			bottom: 4px;
+  			background-color: #ccc;
+  			-webkit-transition: .4s;
+  			transition: .4s;
+			}
+
+		input:checked + .slider {
+  			background-color: #B96963;
+			}
+
+		input:focus + .slider {
+  			box-shadow: 0 0 1px #2196F3;
+			}
+
+		input:checked + .slider:before {
+  			-webkit-transform: translateX(26px);
+  			-ms-transform: translateX(26px);
+  			transform: translateX(26px);
+			background-color: #B98A7D;
+			} 
+
+		</style>
+		</head>
+		<body>
+		
+		<h2 style="color:#9BAE5C;">Toggle LED Off/On</h2>
+
+		<label class="switch">
+  		<input type="checkbox">
+  		<span class="slider"></span>
+		</label>
+
+		</body>
+
+</html>
+
