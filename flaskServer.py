@@ -11,6 +11,14 @@
 from flask import Flask, render_template, jsonify, Response
 import sqlite3 as sql
 import json
+import RPi.GPIO as GPIO
+
+
+ledPin = 17
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(ledPin, GPIO.OUT)
 
 #Globals
 #con = sql.connect('tempLog.db')
@@ -23,16 +31,28 @@ def index():
 
 @app.route("/sqlData")
 def chartData():
-	con = sql.connect('tempLog.db')
+	con = sql.connect('tempLog2.db')
 	cur = con.cursor()
 	con.row_factory = sql.Row
-	cur.execute("SELECT Date, Temperature FROM tempLog WHERE Temperature > 60")
+	cur.execute("SELECT Date, Temperature FROM tempLog2 WHERE Temperature > 60")
 	dataset = cur.fetchall()
 	print (dataset)
 	chartData = []
 	for row in dataset:
 		chartData.append({"Date": row[0], "Temperature": float(row[1])})
 	return Response(json.dumps(chartData), mimetype='application/json')
+
+@app.route('/turnOffLED')
+def turnOffLED():
+    GPIO.output(ledPin, False)
+    print('LED Off')
+    return "Nothing"
+
+#@app.route('/turnOnLED')
+#def turnOnLED():
+ #   GPIO.output(ledPin, True)
+  #  print('LED On')
+   # return "Nothing"
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=2020, debug=True, use_reloader=False)

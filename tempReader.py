@@ -6,7 +6,7 @@ import os
 import sqlite3
 
 #Create a Connection object 
-con = sqlite3.connect('tempLog.db')
+con = sqlite3.connect('tempLog2.db')
 
 #Cursor object to perform SQL commands
 cur = con.cursor()
@@ -19,6 +19,7 @@ oldTime = 60
 
 #Time Variables
 currentDate = time.strftime("%B %d, %Y")
+#currentDate = time.strftime("%Y-%m-%d")
 currentTime = time.strftime("%H:%M:%S")
 
 #Initialize GPIO
@@ -42,7 +43,7 @@ try:
 			if time.time() - oldTime > 59:
                         	temp, hum =readF(tempPin)
 				currentTime=time.strftime("%H:%M:%S")
-                        	cur.execute("insert into tempLog values(?,?)", (currentDate, temp))
+                        	cur.execute("insert into tempLog2 values(?,?)", (currentDate, temp))
                         	con.commit()
 				print(currentDate)
 				print(currentTime)
