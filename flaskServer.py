@@ -15,6 +15,7 @@ import RPi.GPIO as GPIO
 
 
 ledPin = 17
+ledStatus = 0
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -42,17 +43,18 @@ def chartData():
 		chartData.append({"Date": row[0], "Temperature": float(row[1])})
 	return Response(json.dumps(chartData), mimetype='application/json')
 
-@app.route('/turnOffLED')
-def turnOffLED():
-    GPIO.output(ledPin, False)
-    print('LED Off')
-    return "Nothing"
-
-#@app.route('/turnOnLED')
-#def turnOnLED():
- #   GPIO.output(ledPin, True)
-  #  print('LED On')
-   # return "Nothing"
+@app.route('/controlLED')
+def controlLED():
+	global ledStatus
+	if ledStatus == 0:
+		GPIO.output(ledPin, True)
+		print('LED On')
+		ledStatus += 1
+	elif ledStatus == 1:
+	    	GPIO.output(ledPin, False)
+		print('LED Off') 
+		ledStatus -= 1
+    	return "Nothing"
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=2020, debug=True, use_reloader=False)
