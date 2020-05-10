@@ -50,4 +50,5 @@ will alert the admin. The flask module is imported for implementing flask templa
 
 ## **Project Diagram**
 <img src="/images/ProjectDiagram.png" alt="Diagram"/> 
+
 **Fig. 7** Final Project Diagram made in Google Drawing
