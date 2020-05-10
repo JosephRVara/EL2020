@@ -29,7 +29,7 @@ will be used as the formatting of the web server. The sqlite3 module will allow 
 Email communication will be made available using the smtplib module. Information and updates regarding the state of the plant environment
 will alert the admin. The flask module is imported for implementing flask templates and commands.
 
-![GPIOExtensionBoard](/images/GPIO.png =50x)
+![GPIOExtensionBoard](/images/GPIO.png =250x)
 ![MCP3008_ADC](/images/MCP3008_ADC.png =50x)
 ![DHT11](/images/DHT11.png =50x)
 ![TemperatureSensor](/images/TempSens.png =50x)
