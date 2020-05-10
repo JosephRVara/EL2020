@@ -1,5 +1,5 @@
 ![NewPaltz Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg) <!-- .element height="50%" width="50%" -->
-# **Spring 2020 Embedded Linux class.**
+# **Spring 2020 Embedded Linux class**
 This repository documents my class work and projects done for *__CPS342__*.
 
 1. **Personal Information:**
@@ -15,3 +15,5 @@ This repository documents my class work and projects done for *__CPS342__*.
 2. **Class Start Date:** Jan 22, 2020
 
 3. **Class End Date:** May 6, 2020
+
+# **Final Project**
