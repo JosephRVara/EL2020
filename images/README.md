@@ -1,2 +1,4 @@
-~ Each electrical component used in the circuit (except RasPi)
-~ Image types are .png
+# **Info.**
+
+<br>~ Each electrical component used in the circuit (except RasPi)
+<br>~ Image types are .png
