@@ -12,9 +12,10 @@ from flask import Flask, render_template, jsonify, Response
 import sqlite3 as sql
 import json
 import RPi.GPIO as GPIO
-
+import time
 
 ledPin = 17
+
 ledStatus = 0
 
 GPIO.setmode(GPIO.BCM)
@@ -50,8 +51,8 @@ def controlLED():
 		GPIO.output(ledPin, True)
 		print('LED On')
 		ledStatus += 1
-	elif ledStatus == 1:
-	    	GPIO.output(ledPin, False)
+	elif ledStatus == 1: 
+	   	GPIO.output(ledPin, False)
 		print('LED Off') 
 		ledStatus -= 1
     	return "Nothing"
