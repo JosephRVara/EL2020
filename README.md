@@ -1,4 +1,5 @@
 <img src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg" width="50%">
+
 # **Final Project for CPS342 Embedded Linux 2020**
 This repository contains all files, code and class work for the Final Project.
 
@@ -28,5 +29,10 @@ will be used as the formatting of the web server. The sqlite3 module will allow 
 Email communication will be made available using the smtplib module. Information and updates regarding the state of the plant environment
 will alert the admin. The flask module is imported for implementing flask templates and commands.
 
+![GPIOExtensionBoard](/images/GPIO.png)
+![MCP3008_ADC](/images/MCP3008_ADC.png)
+![DHT11](/images/DHT11.png)
+![TemperatureSensor](/images/TempSens.png)
+![PhotoResistor](/images/PhotoResistor.png)
+![WaterLevelSensor](/images/WaterLevelSens.png)
 
-![GPIO](/images/WaterLevelSens.png)
