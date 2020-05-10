@@ -49,6 +49,10 @@ will alert the admin. The flask module is imported for implementing flask templa
 * *SunFounder Raspberry Pi RAB Holder Breadboard Kit* - $13.59
 
 ## **Project Diagram**
+<<<<<<< HEAD
 <img src="/images/ProjectDiagram.png" alt="Diagram" width="350"/> 
+=======
+<img src="/images/ProjectDiagram.png" alt="Diagram"/> 
+>>>>>>> 11e566ffb484cc015d83542e25e1f36b3e411b6d
 
 **Fig. 7** Final Project Diagram made in Google Drawing
