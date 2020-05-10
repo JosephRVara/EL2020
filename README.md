@@ -29,11 +29,20 @@ will be used as the formatting of the web server. The sqlite3 module will allow 
 Email communication will be made available using the smtplib module. Information and updates regarding the state of the plant environment
 will alert the admin. The flask module is imported for implementing flask templates and commands.
 
-![GPIOExtensionBoard](/images/GPIO.png)
-![MCP3008_ADC](/images/MCP3008_ADC.png =50x)
-![DHT11](/images/DHT11.png =50x)
-![TemperatureSensor](/images/TempSens.png =50x)
-![PhotoResistor](/images/PhotoResistor.png =50x)
-![WaterLevelSensor](/images/WaterLevelSens.png =50x)
+<img src="/images/GPIO.png" alt="GPIO" width="100"/>
+**GPIO Extension Board**
 
-<img src="/images/TempSens.png" alt="TempSens" width="50"/>
+<img src="/images/MCP3008_ADC.png" alt="ADC" width="100"/>
+**MCP3008 Analog-to-Digital Converter**
+
+<img src="/images/TempSens.png" alt="TempSens" width="100"/>
+**Temperature Sensor**
+
+<img src="/images/DHT11.png" alt="DHT11" width="100"/>
+**Temperature & Humidity Sensor**
+
+<img src="/images/PhotoResistor.png" alt="PhotoResistor" width="100"/>
+**Photo-Resistor Sensor
+
+<img src="/images/WaterLevelSens.png" alt="WaterLevelSens" width="100"/>
+**Water Level Sensor**
