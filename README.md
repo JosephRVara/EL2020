@@ -30,19 +30,25 @@ Email communication will be made available using the smtplib module. Information
 will alert the admin. The flask module is imported for implementing flask templates and commands.
 
 <img src="/images/GPIO.png" alt="GPIO" width="250"/>
+
 ###### **GPIO Extension Board**
 
 <img src="/images/MCP3008_ADC.png" alt="ADC" width="250"/>
+
 ###### **MCP3008 Analog-to-Digital Converter**
 
 <img src="/images/TempSens.png" alt="TempSens" width="100"/>
+
 ###### **Temperature Sensor**
 
 <img src="/images/DHT11.png" alt="DHT11" width="100"/>
+
 ###### **Temperature & Humidity Sensor**
 
 <img src="/images/PhotoResistor.png" alt="PhotoResistor" width="250"/>
-######**Photo-Resistor Sensor
+
+###### **Photo-Resistor Sensor**
 
 <img src="/images/WaterLevelSens.png" alt="WaterLevelSens" width="100"/>
+
 ###### **Water Level Sensor**
