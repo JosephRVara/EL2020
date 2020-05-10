@@ -1,4 +1,4 @@
-<img src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg" width="50%"
+<img src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg" width="50%">
 # **Final Project for CPS342 Embedded Linux 2020**
 This repository contains all files, code and class work for the Final Project.
 
@@ -29,4 +29,4 @@ Email communication will be made available using the smtplib module. Information
 will alert the admin. The flask module is imported for implementing flask templates and commands.
 
 
-![GPIO](~/CPS342/gitInfo/EL2020/images/WaterLevelSens.png)
+![GPIO](/images/WaterLevelSens.png)
