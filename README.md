@@ -1,7 +1,7 @@
 <img src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg" width="50%">
 
 # **Final Project for CPS342 Embedded Linux 2020**
-This repository contains all files, code and class work for the Final Project.
+This repository contains all files, code and updates for the Final Project.
 
 ## **Goal**
 Create an environment monitor for one of my succulents. An elecronic system will monitor water level, soil temperature, humidity, and
@@ -29,26 +29,24 @@ will be used as the formatting of the web server. The sqlite3 module will allow 
 Email communication will be made available using the smtplib module. Information and updates regarding the state of the plant environment
 will alert the admin. The flask module is imported for implementing flask templates and commands.
 
-<img src="/images/GPIO.png" alt="GPIO" width="250"/>
+<img src="/images/GPIO.png" alt="GPIO" width="250"/> **Fig. 1** GPIO Extension Board
 
-###### **GPIO Extension Board**
+<img src="/images/MCP3008_ADC.png" alt="ADC" width="250"/> **Fig. 2** MCP3008 Analog-to-Digital Converter
 
-<img src="/images/MCP3008_ADC.png" alt="ADC" width="250"/>
+<img src="/images/TempSens.png" alt="TempSens" width="100"/> **Fig. 3** Temperature Sensor
 
-###### **MCP3008 Analog-to-Digital Converter**
+<img src="/images/DHT11.png" alt="DHT11" width="100"/> **Fig. 4** Temperature & Humidity Sensor
 
-<img src="/images/TempSens.png" alt="TempSens" width="100"/>
+<img src="/images/PhotoResistor.png" alt="PhotoResistor" width="250"/> **Fig. 5** Photo-Resistor Sensor
 
-###### **Temperature Sensor**
+<img src="/images/WaterLevelSens.png" alt="WaterLevelSens" width="100"/> **Fig. 6** Water Level Sensor
 
-<img src="/images/DHT11.png" alt="DHT11" width="100"/>
+## **Materials**
+* *Succulent* - Price varies	
+* *Plant Holder/Pot* - Price varies
+* *CanaKit Raspberry Pi 4 4GB Starter Kit* - $99.99
+* *KOOKYE 16 in 1 Smart Home Sensor Modules Kit* - $22.97
+* *SunFounder Raspberry Pi RAB Holder Breadboard Kit* - $13.59
 
-###### **Temperature & Humidity Sensor**
-
-<img src="/images/PhotoResistor.png" alt="PhotoResistor" width="250"/>
-
-###### **Photo-Resistor Sensor**
-
-<img src="/images/WaterLevelSens.png" alt="WaterLevelSens" width="100"/>
-
-###### **Water Level Sensor**
+## **Project Diagram**
+<img src="/images/ProjectDiagram.png" alt="Diagram" width="350"/> **Fig. 7** Final Project Diagram made in Google Drawing
