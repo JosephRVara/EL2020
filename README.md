@@ -36,4 +36,4 @@ will alert the admin. The flask module is imported for implementing flask templa
 ![PhotoResistor](/images/PhotoResistor.png =50x)
 ![WaterLevelSensor](/images/WaterLevelSens.png =50x)
 
-img[alt=GPIOExtensionBoard] { width: 50px; }
+<img src="/images/TempSens.png" alt="TempSens" width="50"/>
