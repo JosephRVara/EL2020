@@ -20,8 +20,7 @@ The Raspberry Pi 4 can only host digital devices unless an analog to digital con
 sensor is an analog device which outputs a signal voltage that corresponds to water level. In order to measure water level using this 
 sensor, the MCP3008 is required. The MCP3008 is a 10 bit ADC which represents the value on a channel from 0 to 1023 (total possible 
 values of 1024) where 1023 is the maximum voltage of the GPIO output pin. This value can then be converted to a representative value
-for water level. Other electronic components in this project which are considered to be analog devices include the temperature sensor and
-photoresistive sensor.
+for water level. Other electronic components in this project which are considered to be analog devices include the Photosensitive Light module.
 
 Additionally, a few modules will be used in the Python code using the import function. These modules include json, sqlite3, smtplib 
 and flask. The JSON module will enable the python script to be read as a string into another file. Specifically, the .html file which 
@@ -33,13 +32,13 @@ will alert the admin. The flask module is imported for implementing flask templa
 
 <img src="/images/MCP3008_ADC.png" alt="ADC" width="250"/> **Fig. 2** MCP3008 Analog-to-Digital Converter
 
-<img src="/images/TempSens.png" alt="TempSens" width="100"/> **Fig. 3** Temperature Sensor
+<img src="/images/TempSens.png" alt="DS18B20" width="100"/> **Fig. 3** DS18B20 Temperature Sensor Module
 
-<img src="/images/DHT11.png" alt="DHT11" width="100"/> **Fig. 4** Temperature & Humidity Sensor
+<img src="/images/DHT11.png" alt="DHT11" width="100"/> **Fig. 4** DHT11 Temperature & Humidity Sensor Module
 
-<img src="/images/PhotoResistor.png" alt="PhotoResistor" width="250"/> **Fig. 5** Photo-Resistor Sensor
+<img src="/images/PhotoResistor.png" alt="PhotoResistor" width="250"/> **Fig. 5** Photosensitive Light Module
 
-<img src="/images/WaterLevelSens.png" alt="WaterLevelSens" width="100"/> **Fig. 6** Water Level Sensor
+<img src="/images/WaterLevelSens.png" alt="WaterLevelSens" width="100"/> **Fig. 6** Water Level Sensor Module
 
 ## **Materials**
 * *Succulent* - Price varies	
