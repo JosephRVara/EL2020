@@ -7,11 +7,14 @@ base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
+#Create a Connection object & Cursor object to perform SQL commands
 con = sqlite3.connect('EnvironmentMonitor.db')
 cur = con.cursor()
 
+#Dummy time for first iteration of the loop
 oldTime = 60
 
+#Time Variables
 currentDate = time.strftime("%Y-%m-%d")
 currentTime = time.strftime("%H:%M:%S")
  
@@ -38,15 +41,24 @@ try:
 
     		if time.time() - oldTime > 59:
 			tempC, tempF = read_temp()
+			tempC = round(tempC,1)
+			tempF = round(tempF,1)
 			currentTime = time.strftime("%H:%M:S")
 			cur.execute("insert into DS18B20_TempLog values(?,?)", (time.strftime('%Y-%m-%d %H:%M:%S'), tempF))
 			con.commit()
-			print(tempC)
-			print(tempF)
+			print("_______________")
+                        print("DATE / TIME")
+                        print(currentDate)
+                        print(currentTime)
+			print("_______________")
+			print("TEMP (inside plant holder)")
+			print(tempC, "*C")
+			print(tempF, "*F")
+			print("_______________")
+			print("\n")
 			oldTime = time.time()
 			currentTime = time.strftime("%H:%M:%S")
 
 except KeyboardInterrupt:
 	con.close()
-	print('\nDS18B20 Successfully Shutdown')
-	GPIO.cleanup()
+	print('\nDS18B20 Testing: SUCCESS!')

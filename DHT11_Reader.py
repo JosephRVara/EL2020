@@ -18,7 +18,6 @@ tempPin = 26
 oldTime = 60
 
 #Time Variables
-#currentDate = time.strftime("%B %d, %Y")
 currentDate = time.strftime("%Y-%m-%d")
 currentTime = time.strftime("%H:%M:%S")
 
@@ -46,15 +45,21 @@ try:
                         	cur.execute("insert into DHT11_TempLog values(?,?)", (time.strftime('%Y-%m-%d %H:%M:%S'), temp))
                         	cur.execute("insert into DHT11_HumidityLog values(?,?)", (time.strftime('%Y-%m-%d %H:%M:%S'), hum))
 				con.commit()
+				print("_______________")
+				print("DATE / TIME")
 				print(currentDate)
 				print(currentTime)
-				print(temp)
-				print(hum)
+				print("_______________")
+				print("TEMP / HUM (outside plant holder)")
+				print(temp + '*F')
+				print(hum + ' Humidity')
+				print("_______________")
+				print("\n")
 				oldTime = time.time()
 				currentTime=time.strftime("%H:%M:%S")
 
 except KeyboardInterrupt:
 	con.close()
-	print('\nSensational Sensing!')
+	print('\nDHT11 Testing: SUCCESS!')
         GPIO.cleanup()
 
