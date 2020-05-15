@@ -32,11 +32,11 @@ will alert the admin. The flask module is imported for implementing flask templa
 
 <img src="/images/MCP3008_ADC.png" alt="ADC" width="250"/> **Fig. 2** MCP3008 Analog-to-Digital Converter
 
-<img src="/images/TempSens.png" alt="DS18B20" width="100"/> **Fig. 3** DS18B20 Temperature Sensor Module
+<img src="/images/DS18B20.png" alt="DS18B20" width="100"/> **Fig. 3** DS18B20 Temperature Sensor Module
 
 <img src="/images/DHT11.png" alt="DHT11" width="100"/> **Fig. 4** DHT11 Temperature & Humidity Sensor Module
 
-<img src="/images/PhotoResistor.png" alt="PhotoResistor" width="250"/> **Fig. 5** Photosensitive Light Module
+<img src="/images/PhotoResistorSens.png" alt="PhotoResistorSens" width="250"/> **Fig. 5** Photosensitive Light Module
 
 <img src="/images/WaterLevelSens.png" alt="WaterLevelSens" width="100"/> **Fig. 6** Water Level Sensor Module
 

@@ -6,7 +6,7 @@ import os
 import sqlite3
 
 #Create a Connection object 
-con = sqlite3.connect('EnvironmentMonitor.db')
+con = sqlite3.connect('../EnvironmentMonitor.db')
 
 #Cursor object to perform SQL commands
 cur = con.cursor()
@@ -32,7 +32,7 @@ def readF(tempPin):
         temperature = temperature * 9/5.0 +32
         if humidity is not None and temperature is not None:
                 tempFahr = '{0:0.1f}'.format(temperature)
-		humPercent = '{0:0.1f}%'.format(humidity)
+		humPercent = '{0:0.1f}'.format(humidity)
         else:
                 print('Failed to get reading.')
         return tempFahr, humPercent
@@ -51,8 +51,8 @@ try:
 				print(currentTime)
 				print("_______________")
 				print("TEMP / HUM (outside plant holder)")
-				print(temp + '*F')
-				print(hum + ' Humidity')
+				print(temp + ' *F')
+				print(hum + '% Humidity')
 				print("_______________")
 				print("\n")
 				oldTime = time.time()

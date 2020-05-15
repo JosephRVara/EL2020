@@ -8,7 +8,7 @@ device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
 #Create a Connection object & Cursor object to perform SQL commands
-con = sqlite3.connect('EnvironmentMonitor.db')
+con = sqlite3.connect('../EnvironmentMonitor.db')
 cur = con.cursor()
 
 #Dummy time for first iteration of the loop

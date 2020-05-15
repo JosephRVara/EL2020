@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+
+		<title>Raspberry Pi Temperature</title>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	</head>
+
+	<body onload="go()", bgcolor="#2D2D2D">
+
+		<center>
+		<img src="https://www.raspberrypi.org/app/uploads/2012/01/Spec-RaspberryPi-GIF-256-Transp.gif" alt="RasPi" style="width:48px;height:48px;">
+    <h1 style="color:#7B585B;">Joe's Web Page</h1>
+		<h2 style="color:#7B585B;">SUNY New Paltz - CPS342 Embedded Linux</h2>
+		<h2 style="color:#9BAE5C;">Plant Environment Monitor</h2>
+		<h3 style="color:#A77E4F;">______________________________</h3>
+		</center>
+
+    <center>
+    <h2 style="color:#9BAE5C;">Data Gauges</h2>
+    </center>
+
+		<div>
+		    <table align="center">
+		        <tr>
+		            <td>
+		      <div id="DHT11_Temp_Gauge" style="width: 250px; height: 250px"></div>
+		       </td>
+		            <td>
+		        <div id="DHT11_Hum_Gauge" style="width: 250px; height: 250px"></div>
+		      </td>
+		        <td>
+		        <div id="DS18B20_Gauge" style="width: 250px; height: 250px"></div>
+		        </td>
+						<td>
+					 <div id="Light_Gauge" style="width: 250px; height: 250px"></div>
+					 </td>
+					 <td>
+					 <div id="Water_Gauge" style="width: 250px; height: 250px"></div>
+					 </td>
+		 </tr>
+		    </table>
+		</div>
+
+		<center>
+			<h3 style="color:#A77E4F;">______________________________</h3>
+		 <h2 style="color:#9BAE5C;">Core Charts</h2>
+				<div id="DHT11_Temp_CurveChart" style="width: 1200px; height: 1200px"></div>
+				<div id="DHT11_Humidity_CurveChart" style="width: 1200px; height: 1200px"></div>
+				<div id="DS18B20_CurveChart" style="width: 1200px; height: 1200px"></div>
+				<div id="Light_CurveChart" style="width: 1200px; height: 1200px"></div>
+				<div id="WaterLevel_CurveChart" style="width: 1200px; height: 1200px"></div>
+				</center>
+				
+		<script type='text/javascript'>
+      
+			//Load the charts libraries
+			google.charts.load('current', {packages:['gauge']});
+			google.charts.load('current', { packages: ['corechart'] });
+      
+			//create empty array as a global
+			var chartData1 = [];
+      var chartData2 = [];
+      var chartData3 = [];
+			var chartData4 = [];
+			var chartData5 = [];
+
+			//This function is called when the page loads
+			function go()
+			{
+				goTime = new Date();
+				console.log('It\'s Go Time! '+ goTime);
+				getDHT11_TempData();
+				getDHT11_HumData();
+				getDS18B20_Data();
+				getLight_Data();
+				getWater_Data();
+				
+				setInterval(function() 
+				   {
+					xTime = new Date();
+					console.clear();
+					console.log('Update Initiated: '+xTime);
+					getDHT11_TempData();
+					getDHT11_HumData();
+					getDS18B20_Data();
+					getLight_Data();
+					getWater_Data();
+				}, 60000);
+			}
+      
+			//grabs the data from the sqlData app.route and pushes it into an array
+			//DHT11 Temperature sqlData app.route
+			function getDHT11_TempData(){
+				//Clear the array first
+				chartData1 = [];
+      
+				$.getJSON('/DHT11_TempData', function(chartJSON1) {
+					console.log(chartJSON1);
+					for (i = 0; i < chartJSON1.length; i++){
+						chartData1.push([new Date(chartJSON1[i].Date), chartJSON1[i].RoomTemp]);
+					};
+					
+					drawDHT11_TempGauge();
+					drawDHT11_TempChart();
+				});
+			}
+
+			//DHT11 Humidity sqlData app.route
+			function getDHT11_HumData(){
+				//Clear the array first
+				chartData2 = [];
+			$.getJSON('/DHT11_HumData', function(chartJSON2) {
+				console.log(chartJSON2);
+				for (i = 0; i < chartJSON2.length; i++){
+					chartData2.push([new Date(chartJSON2[i].Date), chartJSON2[i].Humidity]);
+				};
+			
+					drawDHT11_HumGauge();
+					drawDHT11_HumChart();
+				});
+			}
+
+			//DS18B20 Temperature sqlData app.route
+				function getDS18B20_Data(){
+					//Clear the array first
+					chartData3 = [];
+				$.getJSON('/DS18B20_Data', function(chartJSON3) {
+					console.log(chartJSON3);
+					for (i = 0; i < chartJSON3.length; i++){
+						chartData3.push([new Date(chartJSON3[i].Date), chartJSON3[i].SoilTemp]);
+					};
+										drawDS18B20_Gauge();
+										drawDS18B20Chart();
+									});
+								}
+
+								//Photoresistor Sensor Module sqlData app.route
+								function getLight_Data(){
+									//Clear the array first
+									chartData4 = [];
+								$.getJSON('/Photoresistor_Data', function(chartJSON4) {
+									console.log(chartJSON4);
+									for (i = 0; i < chartJSON4.length; i++){
+										chartData4.push([new Date(chartJSON4[i].Date), chartJSON4[i].Light]);
+									};
+										drawLight_Gauge();
+										drawLight_Chart();
+									});
+								}
+
+								//Water Level Sensor Module sqlData app.route
+								function getWater_Data(){
+									//Clear the array first
+									chartData5 = [];
+								$.getJSON('/WaterLevelSens_Data', function(chartJSON5) {
+									console.log(chartJSON5);
+									for (i = 0; i < chartJSON5.length; i++){
+										chartData5.push([new Date(chartJSON5[i].Date), chartJSON5[i].WaterLevel]);
+									};
+										drawWater_Gauge();
+										drawWater_Chart();
+									});
+								}
+
+			//Draws the DHT11 Temperature gauge
+			function drawDHT11_TempGauge() {
+				var g2data1 = new google.visualization.arrayToDataTable([
+					[ {label: 'Room Temp', id:'DHT11_Temp', type: 'number'} ]
+				]);
+				lastRow1 = chartData1[chartData1.length - 1];
+				temp1 = lastRow1[lastRow1.length - 1];
+				g2data1.addRow([temp1]);
+
+				var options1 = {
+				    redFrom: 88, redTo: 120,
+				    yellowFrom:78, yellowTo: 120,
+				    greenFrom:68, greenTo: 120,
+				    minorTicks: 5
+				};
+
+				var formatter1 = new google.visualization.NumberFormat(
+
+				{ suffix: 'ºF', fractionDigits: 1});
+
+				formatter1.format(g2data1, 0);
+
+			    	var gauge1 = new google.visualization.Gauge(document.getElementById('DHT11_Temp_Gauge'));
+			    	gauge1.draw(g2data1, options1);
+			    	gaugeTime1 = new Date();
+			    console.log('Gauge Drawn: '+gaugeTime1);
+	        	}
+
+            //Draws the DHT11 Humidity gauge
+            function drawDHT11_HumGauge() {
+              var g2data2 = new google.visualization.arrayToDataTable([
+                [ {label: 'Humidity', id:'DHT11_Hum', type: 'number'} ]
+              ]);
+              lastRow2 = chartData2[chartData2.length - 1];
+              hum1 = lastRow2[lastRow2.length - 1];
+              g2data2.addRow([hum1]);
+              
+              var options2 = {
+                  redFrom: 88, redTo: 120,
+                  yellowFrom:78, yellowTo: 120,
+                  greenFrom:68, greenTo: 120,
+                  minorTicks: 5
+              };
+
+							var formatter2 = new google.visualization.NumberFormat(
+
+							{ suffix: '%', fractionDigits: 1});
+
+							formatter2.format(g2data2, 0);
+							
+									var gauge2 = new google.visualization.Gauge(document.getElementById('DHT11_Hum_Gauge'));
+									gauge2.draw(g2data2, options2);
+                  gaugeTime2 = new Date();
+                console.log('Gauge Drawn: '+gaugeTime2);
+                  }
+
+                  //Draws the DS18B20 gauge
+                  function drawDS18B20_Gauge() {
+                    var g2data3 = new google.visualization.arrayToDataTable([
+                      [ {label: 'Soil Temp', id:'DS18B20_Temp', type: 'number'} ]
+                    ]);
+                    lastRow3 = chartData3[chartData3.length - 1];
+                    temp2 = lastRow3[lastRow3.length - 1];
+                    g2data3.addRow([temp2]);
+                    
+                    var options3 = {
+                        redFrom: 88, redTo: 120,
+                        yellowFrom:78, yellowTo: 120,
+                        greenFrom:68, greenTo: 120,
+                        minorTicks: 5
+                    };
+
+										var formatter3 = new google.visualization.NumberFormat(
+
+										{ suffix: 'ºF', fractionDigits: 1});
+
+										formatter3.format(g2data3, 0);
+
+                        var gauge3 = new google.visualization.Gauge(document.getElementById('DS18B20_Gauge'));
+                        gauge3.draw(g2data3, options3);
+                        gaugeTime3 = new Date();
+                      console.log('Gauge Drawn: '+gaugeTime3);
+										}
+
+
+										//Draws the Photoresistor sensor module gauge
+										function drawLight_Gauge() {
+											var g2data4 = new google.visualization.arrayToDataTable([
+												[ {label: 'Light', id:'LightSens', type: 'number'} ]
+											]);
+											lastRow4 = chartData4[chartData4.length - 1];
+											light1 = lastRow4[lastRow4.length - 1];
+											g2data4.addRow([light1]);
+											
+											var options4 = {
+													redFrom: 88, redTo: 120,
+													yellowFrom:78, yellowTo: 120,
+													greenFrom:68, greenTo: 120,
+													minorTicks: 5
+											};
+
+											var formatter4 = new google.visualization.NumberFormat(
+
+											{ suffix: '%', fractionDigits: 1});
+
+											formatter4.format(g2data4, 0);
+											
+													var gauge4 = new google.visualization.Gauge(document.getElementById('Light_Gauge'));
+													gauge4.draw(g2data4, options4);
+													gaugeTime4 = new Date();
+												console.log('Gauge Drawn: '+gaugeTime4);
+													}
+
+
+													//Draws the Water Water Level sensor module gauge
+													function drawWater_Gauge() {
+														var g2data5 = new google.visualization.arrayToDataTable([
+															[ {label: 'Water Level', id:'WaterSens', type: 'number'} ]
+														]);
+														lastRow5 = chartData5[chartData5.length - 1];
+														water1 = lastRow5[lastRow5.length - 1];
+														g2data5.addRow([water1]);
+														
+														var options5 = {
+																redFrom: 88, redTo: 120,
+																yellowFrom:78, yellowTo: 120,
+																greenFrom:68, greenTo: 120,
+																minorTicks: 5
+														};
+
+														var formatter5 = new google.visualization.NumberFormat(
+
+														{ suffix: '%', fractionDigits: 1});
+
+														formatter5.format(g2data5, 0);
+														
+																var gauge5 = new google.visualization.Gauge(document.getElementById('Water_Gauge'));
+																gauge5.draw(g2data5, options5);
+																gaugeTime5 = new Date();
+															console.log('Gauge Drawn: '+gaugeTime5);
+																}
+
+
+										//Draws the DHT11 Temperature Chart
+										function drawDHT11_TempChart() {
+										var gdataDHT11temp = new google.visualization.DataTable();
+										gdataDHT11temp.addColumn('date', 'Date');
+										gdataDHT11temp.addColumn('number', 'Room Temperature');
+										gdataDHT11temp.addRows(chartData1);
+
+									var options1 = {
+										title: 'Exterior Temperature Log',
+										titleTextStyle: { color: '#F7F7F7' },
+										vAxis: {title: 'Temp (ºF)',
+											titleTextStyle: { color: '#F7F7F7' },
+											textStyle: { color: '#F7F7F7' },
+											gridlines: { color: '#000000'},
+											format: '0.5'},
+										hAxis: {title: 'Date',
+											titleTextStyle: { color: '#F7F7F7' },
+											textStyle: { color: '#F7F7F7' },
+											gridlines: { color: '#000000' },
+											format: 'MMM d, y'},
+										chart: {
+										curveType: 'function'},
+										series: {0: { color: '#6A9AC0' }, 1:{ color: '#6A9AC0'}},
+										legend: {position: 'bottom', textStyle: { color:'#F7F7F7' }},
+										backgroundColor: '#2D2D2D',
+										chartArea: {backgroundColor: '#D3D3D3'}
+										
+													};
+													
+												var chart1 = new google.visualization.LineChart(document.getElementById('DHT11_Temp_CurveChart'));
+												chart1.draw(gdataDHT11temp, options1);
+												chartTime1 = new Date();
+									}
+
+									//Draws the DHT11 Humidity Chart
+									function drawDHT11_HumChart() {
+									var gdataDHT11hum = new google.visualization.DataTable();
+									gdataDHT11hum.addColumn('date', 'Date');
+									gdataDHT11hum.addColumn('number', 'Humidity');
+									gdataDHT11hum.addRows(chartData2);
+
+								var options2 = {
+									title: 'Humidity Log',
+									titleTextStyle: { color: '#F7F7F7' },
+									vAxis: {title: 'Humidity (%)',
+										titleTextStyle: { color: '#F7F7F7' },
+										textStyle: { color: '#F7F7F7' },
+										gridlines: { color: '#000000'},
+										format: '0.5'},
+									hAxis: {title: 'Date',
+										titleTextStyle: { color: '#F7F7F7' },
+										textStyle: { color: '#F7F7F7' },
+										gridlines: { color: '#000000' },
+										format: 'MMM d, y'},
+									chart: {
+									curveType: 'function'},
+									series: {0: { color: '#6A9AC0' }, 1:{ color: '#6A9AC0'}},
+									legend: {position: 'bottom', textStyle: { color:'#F7F7F7' }},
+									backgroundColor: '#2D2D2D',
+									chartArea: {backgroundColor: '#D3D3D3'}
+									
+												};
+												
+											var chart2 = new google.visualization.LineChart(document.getElementById('DHT11_Humidity_CurveChart'));
+											chart2.draw(gdataDHT11hum, options2);
+											chartTime2 = new Date();
+								}
+
+										//Draws the DS18B20 Chart						
+										function drawDS18B20Chart() {
+										var gdataDS18B20 = new google.visualization.DataTable();
+										gdataDS18B20.addColumn('date', 'Date');
+										gdataDS18B20.addColumn('number', 'Soil Temperature');
+										gdataDS18B20.addRows(chartData3);
+
+									var options3 = {
+										title: 'Interior Temperature Log',
+										titleTextStyle: { color: '#F7F7F7' },
+										vAxis: {title: 'Temp (ºF)',
+											titleTextStyle: { color: '#F7F7F7' },
+											textStyle: { color: '#F7F7F7' },
+											gridlines: { color: '#000000'},
+											format: '0.5'},
+										hAxis: {title: 'Date',
+											titleTextStyle: { color: '#F7F7F7' },
+											textStyle: { color: '#F7F7F7' },
+											gridlines: { color: '#000000' },
+											format: 'MMM d, y'},
+										chart: {
+										curveType: 'function'},
+										series: {0: { color: '#6A9AC0' }, 1:{ color: '#6A9AC0'}},
+										legend: {position: 'bottom', textStyle: { color:'#F7F7F7' }},
+										backgroundColor: '#2D2D2D',
+										chartArea: {backgroundColor: '#D3D3D3'}
+										
+					        				};
+													
+					        			var chart3 = new google.visualization.LineChart(document.getElementById('DS18B20_CurveChart'));
+					        			chart3.draw(gdataDS18B20, options3);
+					        			chartTime3 = new Date();
+							}
+
+							//Draws the Photoresistor Sensor Module Chart
+							function drawLight_Chart() {
+							var gdataLight = new google.visualization.DataTable();
+							gdataLight.addColumn('date', 'Date');
+							gdataLight.addColumn('number', 'Light');
+							gdataLight.addRows(chartData4);
+
+						var options4 = {
+							title: 'Light Level Log',
+							titleTextStyle: { color: '#F7F7F7' },
+							vAxis: {title: 'Light (%)',
+								titleTextStyle: { color: '#F7F7F7' },
+								textStyle: { color: '#F7F7F7' },
+								gridlines: { color: '#000000'},
+								format: '0.5'},
+							hAxis: {title: 'Date',
+								titleTextStyle: { color: '#F7F7F7' },
+								textStyle: { color: '#F7F7F7' },
+								gridlines: { color: '#000000' },
+								format: 'MMM d, y'},
+							chart: {
+							curveType: 'function'},
+							series: {0: { color: '#6A9AC0' }, 1:{ color: '#6A9AC0'}},
+							legend: {position: 'bottom', textStyle: { color:'#F7F7F7' }},
+							backgroundColor: '#2D2D2D',
+							chartArea: {backgroundColor: '#D3D3D3'}
+							
+										};
+										
+									var chart4 = new google.visualization.LineChart(document.getElementById('Light_CurveChart'));
+									chart4.draw(gdataLight, options4);
+									chartTime4 = new Date();
+						}
+
+						//Draws the Water Level Sensor Module Chart
+						function drawWater_Chart() {
+						var gdataWater = new google.visualization.DataTable();
+						gdataWater.addColumn('date', 'Date');
+						gdataWater.addColumn('number', 'Water Percentage');
+						gdataWater.addRows(chartData5);
+
+					var options5 = {
+						title: 'Water Level Log',
+						titleTextStyle: { color: '#F7F7F7' },
+						vAxis: {title: 'Light (%)',
+							titleTextStyle: { color: '#F7F7F7' },
+							textStyle: { color: '#F7F7F7' },
+							gridlines: { color: '#000000'},
+							format: '0.5'},
+						hAxis: {title: 'Date',
+							titleTextStyle: { color: '#F7F7F7' },
+							textStyle: { color: '#F7F7F7' },
+							gridlines: { color: '#000000' },
+							format: 'MMM d, y'},
+						chart: {
+						curveType: 'function'},
+						series: {0: { color: '#6A9AC0' }, 1:{ color: '#6A9AC0'}},
+						legend: {position: 'bottom', textStyle: { color:'#F7F7F7' }},
+						backgroundColor: '#2D2D2D',
+						chartArea: {backgroundColor: '#D3D3D3'}
+						
+									};
+									
+								var chart5 = new google.visualization.LineChart(document.getElementById('WaterLevel_CurveChart'));
+								chart5.draw(gdataWater, options5);
+								chartTime5 = new Date();
+					}
+
+
+		</script>
+  
+</html>

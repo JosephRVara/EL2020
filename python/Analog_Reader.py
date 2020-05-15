@@ -7,7 +7,7 @@ import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
 #Create a Connection object 
-con = sqlite3.connect('EnvironmentMonitor.db')
+con = sqlite3.connect('../EnvironmentMonitor.db')
 
 #Cursor object to perform SQL commands
 cur = con.cursor()
@@ -35,7 +35,7 @@ try:
 		if time.time() - oldTime > 59:
 			waterLev = mcp.read_adc(0)
 			photoSens = mcp.read_adc(1)
-			waterPercentage = round(((waterLev/float(500))*100),1)
+			waterPercentage = round(((waterLev/float(650))*100),1)
 			lightPercentage = 100-round(((photoSens/float(950))*100),1)
 			currentTime=time.strftime("%H:%M:%S")
                 	cur.execute("insert into WaterLevelLog values(?,?)", (time.strftime('%Y-%m-%d %H:%M:%S'), waterPercentage))
