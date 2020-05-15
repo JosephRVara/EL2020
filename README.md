@@ -51,3 +51,46 @@ will alert the admin. The flask module is imported for implementing flask templa
 <img src="/images/ProjectDiagram.png" alt="Diagram"/> 
 
 **Fig. 7** Final Project Diagram made in Google Drawing
+
+## **Wiring Instructions**
+
+1. GPIO Extension board to Raspberry Pi 4.
+
+2. Fan attached to Raspberry Pi 4 to avoid overheating. Connect to ground and 3.3V.
+
+3. From the 3.3V pin and any GND pin on the GPIO Extension Board, link up both power rails to 3.3V and GND.
+
+4. Connect the MCP3008 analog-to-digital converter to the breadboard.
+
+5. Following the description of each pin from Figure 1, proceed to ground all CH2-CH7. This will avoid any 
+   interference with CH1 and CH0. We only need two channels for this project because the only data being sent back  
+   from the ADC to the GPIO is from two analog devices.
+
+6. Connect Raspberry Pi 3.3V to MCP3008 VDD
+
+7. Connect Raspberry Pi 3.3V to MCP3008 VREF
+
+8. Connect Raspberry Pi GND to MCP3008 AGND
+
+9. Connect Raspberry Pi GND to MCP3008 DGND
+
+10. Connect Raspberry Pi pin 18 to MCP3008 CLK
+
+11. Connect Raspberry Pi pin 23 to MCP3008 DOUT
+
+12. Connect Raspberry Pi pin 24 to MCP3008 DIN
+
+13. Connect Raspberry Pi pin 25 to MCP3008 CS/SHDN
+
+14. Connect the Water Level Sensor to ground, 3.3V and signal to CH0.
+
+15. Connect the Photosensitive Light Sensor Module to ground, 3.3V and signal to CH1.
+
+16. The DHT11 will be connected to ground, 3.3V and signal to pin 26.
+
+17. The DS18B20 Module will be connected to ground, 3.3V and signal to pin 4.
+
+<img src="https://cdn-learn.adafruit.com/assets/assets/000/030/456/medium800/sensors_raspberry_pi_mcp3008pin.gif?1455010861" alt="MCP3008"/> 
+
+**Fig. 8** MCP3008 Pin Detail
+
